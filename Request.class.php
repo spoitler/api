@@ -6,14 +6,15 @@ class Request {
      * @var array
      */
     public $url;
+    public $data;
     /**
      * Http method
      * @var string
      */
     public $method;
 
-    private function __construct($url, $method){
-        $this->url = $url;
+    private function __construct($data, $method){
+        $this->data = $data;
         $this->method = $method;
     }
     /**
@@ -21,6 +22,7 @@ class Request {
      * @return Request
      */
     public static function parse(){
+        //var_dump($_SERVER);
         $url = (isset($_GET['url']) && !empty($_GET['url'])) ? $_GET['url'] : "";
         $url = trim($url, '/');
         if(empty($url)){
@@ -30,6 +32,15 @@ class Request {
         }else{
             $url = explode('/', $url);
         }
-        return new Request($url, $_SERVER['REQUEST_METHOD']);
+
+        // TODO: url Parser on 'QUERY_STRING' to extract filter (e.g licence)
+
+        $data = isset($_GET['licence']) ? ["url" => $url, "filter" => $_GET['licence']] : ["url" => $url,"filter" => ""];
+
+        return new Request($data, $_SERVER['REQUEST_METHOD']);
     }
 }
+/**
+* Filter
+* - licence_plate_reports
+*/

@@ -19,6 +19,6 @@ class DaoReport extends Dao
         $result = $db->prepare('SELECT * FROM reports WHERE Id_reports=:id');
         $result->bindParam(":id",$id);
         $result->execute();
-        return $result->fetchAll(PDO::FETCH_OBJ);
+        return $result->fetch(PDO::FETCH_OBJ);
     }
 }

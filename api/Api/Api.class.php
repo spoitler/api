@@ -13,10 +13,10 @@ abstract class Api
 
     static function execute(Request $request)
     {
-        if (empty($request->url[0])) {
+        if (empty($request->data['url'][0])) {
             return FALSE;
         }
-        $classname = 'Api' . ucfirst($request->url[0]);
+        $classname = 'Api' . ucfirst($request->data['url'][0]);
         $filename = 'api/Api/' . $classname . '.class.php';
         if (! is_file($filename)) {
             return FALSE;

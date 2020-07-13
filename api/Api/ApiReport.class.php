@@ -9,10 +9,10 @@ class ApiReport extends Api
 
     public static function get(Request $request)
     {
-        if (!isset($request->url[1])) {
+        if (!isset($request->data['url'][1])) {
             $reports = DaoReport::getAllReports();
         }else {
-            $reports = DaoReport::getReportById($request->url[1]);
+            $reports = DaoReport::getReportById($request->data['url'][1]);
         }
 
         header('Content-Type: application/json');
